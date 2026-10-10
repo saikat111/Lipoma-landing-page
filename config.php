@@ -101,7 +101,7 @@ function init_sqlite_tables(PDO $pdo): void {
 
     // Seed Default Settings
     $default_settings = [
-        'site_title'           => 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | ১০০% অরিজিনাল',
+        'site_title'           => 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | 100% অরিজিনাল',
         'product_name'         => 'South Moon Lipoma Removal Spray',
         'hotline'              => '01872307272',
         'whatsapp'             => '01872307272',

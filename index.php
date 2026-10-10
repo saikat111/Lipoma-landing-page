@@ -2,7 +2,7 @@
 require_once __DIR__ . '/config.php';
 
 // Fetch settings
-$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | ১০০% অরিজিনাল');
+$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | 100% অরিজিনাল');
 $product_name         = get_setting('product_name', 'South Moon Lipoma Removal Spray');
 $hotline              = get_setting('hotline', '01872307272');
 $whatsapp             = get_setting('whatsapp', '01872307272');
@@ -32,7 +32,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($site_title) ?></title>
-    <meta name="description" content="South Moon Lipoma Removal Spray - অপারেশন ছাড়াই লাইপোমা ও চর্বির দলা দূর করার ১০০% নিরাপদ প্রাকৃতিক হার্বাল সমাধান। সারা দেশে ক্যাশ অন ডেলিভারি।">
+    <meta name="description" content="South Moon Lipoma Removal Spray - অপারেশন ছাড়াই লাইপোমা ও চর্বির দলা দূর করার 100% নিরাপদ প্রাকৃতিক হার্বাল সমাধান। সারা দেশে ক্যাশ অন ডেলিভারি।">
     
     <!-- Open Graph for Facebook Ads & Sharing -->
     <meta property="og:title" content="<?= htmlspecialchars($site_title) ?>">
@@ -116,7 +116,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                         <i class="fa-solid fa-award"></i>
                     </div>
                     <div class="trust-badge-content">
-                        <span class="trust-badge-title">★ ১০০% অরিজিনাল ও কার্যকরী ★</span>
+                        <span class="trust-badge-title">★ 100% অরিজিনাল ও কার্যকরী ★</span>
                         <span class="trust-badge-subtitle">ন্যাচারাল ভেষজ ফর্মুলা গ্যারান্টি</span>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     </span>
                 </h1>
                 <p class="hero-subtitle">
-                    টানা একমাস ব্যবহারে খুব সহজেই পাবেন লাইপোমা ও চর্বির দলা থেকে <strong>শতভাগ মুক্তি ইনশাআল্লাহ</strong>, ১০০% কার্যকরী গ্যারান্টি।
+                    টানা একমাস ব্যবহারে খুব সহজেই পাবেন লাইপোমা ও চর্বির দলা থেকে <strong>শতভাগ মুক্তি ইনশাআল্লাহ</strong>, <span class="highlight-100">100% কার্যকরী গ্যারান্টি</span>।
                 </p>
             </div>
 
@@ -167,7 +167,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                             <i class="fa-solid fa-leaf"></i>
                         </div>
                         <div>
-                            <h4>১০০% প্রাকৃতিক ভেষজ উপাদানে প্রস্তুত</h4>
+                            <h4>100% প্রাকৃতিক ভেষজ উপাদানে প্রস্তুত</h4>
                             <p>জাফরান, অ্যাস্ট্রাগালাস ও জিনসেং সমৃদ্ধ নিরাপদ চীনা হারবাল ফর্মুলা।</p>
                         </div>
                     </div>
@@ -295,7 +295,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
             <!-- Natural Herbal Ingredients (4.webp) -->
             <div class="ingredients-card">
                 <div>
-                    <span class="section-tag tag-green">১০০% ভেষজ উপাদান</span>
+                    <span class="section-tag tag-green">100% ভেষজ উপাদান</span>
                     <h3 style="font-size: 1.45rem; color: var(--primary-deep); font-weight: 800; margin-bottom: 12px;">প্রাকৃতিক চীনা হার্বাল উপাদানের সংমিশ্রণ</h3>
                     <p style="font-size: 1.05rem; color: #475569;">
                         রাসায়নিক স্টেরয়েড বা ক্ষতিকর উপাদানের পরিবর্তে এতে রয়েছে প্রাচীন চিকিৎসায় ব্যবহৃত দুর্লভ প্রাকৃতিক হার্বস:
@@ -361,152 +361,157 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <section class="section-padding reviews-section">
         <div class="container">
             <div class="section-title-wrap">
-                <span class="section-tag tag-green">গ্রাহকদের বাস্তব অভিজ্ঞতা ও ফলাফল</span>
-                <h2 class="section-title">আমাদের সন্তুষ্ট কাস্টমারদের রিভিউ ও মতামত</h2>
-                <p class="section-desc">হাজারো সন্তুষ্ট গ্রাহক আমাদের প্রোডাক্ট ব্যবহার করে লাইপোমা থেকে মুক্ত হয়েছেন। স্ক্রিনশটগুলোতে ক্লিক করে বড় করে দেখুন।</p>
-                <div class="review-scroll-hint">
-                    <i class="fa-solid fa-arrows-left-right"></i> অটো-স্ক্রলিং চলছে • থামিয়ে দেখতে মাউস রাখুন বা টাচ করুন
+                <span class="section-tag tag-green"><i class="fa-solid fa-star"></i> গ্রাহকদের বাস্তব অভিজ্ঞতা ও ফলাফল</span>
+                <h2 class="section-title">আমাদের সন্তুষ্ট কাস্টমারদের রিভিউ ও মেসেঞ্জার প্রমাণ</h2>
+                <p class="section-desc">হাজারো সন্তুষ্ট গ্রাহক সাউথ মুন লাইপোমা স্প্রে ব্যবহার করে ইতিবাচক ফলাফল পেয়েছেন। আসল চ্যাট স্ক্রিনশটগুলো দেখে নিন।</p>
+                <div class="reviews-rating-bar">
+                    <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="rating-text"><strong>4.9 / 5</strong> রেটিং • ৩,৫০০+ সন্তুষ্ট কাস্টমার • <strong>100% আসল প্রমাণ</strong></span>
                 </div>
             </div>
         </div>
 
-        <!-- Infinite Auto-Scrolling Reviews Marquee -->
-        <div class="reviews-marquee-container" id="reviews-marquee">
-            <div class="reviews-marquee-track">
-                <!-- Group 1 -->
-                <div class="reviews-slide-group">
+        <!-- Premium Auto-Sliding Reviews Carousel -->
+        <div class="reviews-carousel-container" id="reviews-carousel">
+            <button type="button" class="carousel-arrow carousel-prev" id="reviews-prev-btn" aria-label="Previous Review">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="reviews-carousel-viewport" id="reviews-viewport">
+                <div class="reviews-carousel-track" id="reviews-track">
                     <!-- Review 1 -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/1.jpg.jpeg" alt="Messenger Review Screenshot 1" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="review-slide" data-index="0">
+                        <div class="review-card-box">
+                            <div class="review-card-header">
+                                <div class="reviewer-profile">
+                                    <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">ইমরান হোসেন আইয়ুব</span>
+                                        <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (মেসেঞ্জার)</span>
+                                    </div>
+                                </div>
+                                <div class="card-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
-                            <div class="review-author">ইমরান হোসেন আইয়ুব</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (মেসেঞ্জার)</div>
-                            <p class="review-text">"১ মাস ১৫ দিন ব্যবহার করতেছি, আগের চেয়ে অনেক ছোট হয়ে আসছে আলহামদুলিল্লাহ।"</p>
+
+                            <div class="review-screenshot-box review-zoom-btn" title="ক্লিক করে বড় করে দেখুন">
+                                <img src="assets/reviews/1.jpg.jpeg" alt="গ্রাহক রিভিউ স্ক্রিনশট ১" loading="lazy">
+                                <div class="zoom-badge">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> সম্পূর্ণ ছবি দেখুন
+                                </div>
+                            </div>
+
+                            <div class="review-quote">
+                                <i class="fa-solid fa-quote-left"></i>
+                                <p>"১ মাস ১৫ দিন ব্যবহার করতেছি, আগের চেয়ে অনেক ছোট হয়ে আসছে আলহামদুলিল্লাহ।"</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Review 2 -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/2.jpg.jpeg" alt="Facebook Review Screenshot 2" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="review-slide" data-index="1">
+                        <div class="review-card-box">
+                            <div class="review-card-header">
+                                <div class="reviewer-profile">
+                                    <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">আশাদুজ্জামান বাবু</span>
+                                        <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</span>
+                                    </div>
+                                </div>
+                                <div class="card-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
-                            <div class="review-author">আশাদুজ্জামান বাবু</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আলহামদুলিল্লাহ, আমি খুবই উপকৃত হয়েছি, আপনারা ভালো থাকবেন।"</p>
+
+                            <div class="review-screenshot-box review-zoom-btn" title="ক্লিক করে বড় করে দেখুন">
+                                <img src="assets/reviews/2.jpg.jpeg" alt="গ্রাহক রিভিউ স্ক্রিনশট ২" loading="lazy">
+                                <div class="zoom-badge">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> সম্পূর্ণ ছবি দেখুন
+                                </div>
+                            </div>
+
+                            <div class="review-quote">
+                                <i class="fa-solid fa-quote-left"></i>
+                                <p>"আলহামদুলিল্লাহ, আমি খুবই উপকৃত হয়েছি, আপনারা ভালো থাকবেন।"</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Review 3 -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/4.jpg.jpeg" alt="Facebook Review Screenshot 3" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="review-slide" data-index="2">
+                        <div class="review-card-box">
+                            <div class="review-card-header">
+                                <div class="reviewer-profile">
+                                    <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">মো: জিয়াউর রহমান</span>
+                                        <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</span>
+                                    </div>
+                                </div>
+                                <div class="card-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
-                            <div class="review-author">মো: জিয়াউর রহমান</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আলহামদুলিল্লাহ আল্লাহর রহমতে উপকার পেয়েছি।"</p>
+
+                            <div class="review-screenshot-box review-zoom-btn" title="ক্লিক করে বড় করে দেখুন">
+                                <img src="assets/reviews/4.jpg.jpeg" alt="গ্রাহক রিভিউ স্ক্রিনশট ৩" loading="lazy">
+                                <div class="zoom-badge">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> সম্পূর্ণ ছবি দেখুন
+                                </div>
+                            </div>
+
+                            <div class="review-quote">
+                                <i class="fa-solid fa-quote-left"></i>
+                                <p>"আলহামদুলিল্লাহ আল্লাহর রহমতে উপকার পেয়েছি।"</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Review 4 -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/5.jpg.jpeg" alt="Facebook Review Screenshot 4" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="review-slide" data-index="3">
+                        <div class="review-card-box">
+                            <div class="review-card-header">
+                                <div class="reviewer-profile">
+                                    <div class="reviewer-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                    <div class="reviewer-info">
+                                        <span class="reviewer-name">নুরশেদ আহমেদ</span>
+                                        <span class="reviewer-status"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</span>
+                                    </div>
+                                </div>
+                                <div class="card-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
-                            <div class="review-author">নুরশেদ আহমেদ</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আমি ২টা নিয়েছিলাম, আমি এখন সম্পূর্ণ সুস্থ ধন্যবাদ।"</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Group 2 (Duplicate for Infinite Smooth Scrolling Loop) -->
-                <div class="reviews-slide-group" aria-hidden="true">
-                    <!-- Review 1 Duplicate -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/1.jpg.jpeg" alt="Messenger Review Screenshot 1" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="review-screenshot-box review-zoom-btn" title="ক্লিক করে বড় করে দেখুন">
+                                <img src="assets/reviews/5.jpg.jpeg" alt="গ্রাহক রিভিউ স্ক্রিনশট ৪" loading="lazy">
+                                <div class="zoom-badge">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> সম্পূর্ণ ছবি দেখুন
+                                </div>
                             </div>
-                            <div class="review-author">ইমরান হোসেন আইয়ুব</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (মেসেঞ্জার)</div>
-                            <p class="review-text">"১ মাস ১৫ দিন ব্যবহার করতেছি, আগের চেয়ে অনেক ছোট হয়ে আসছে আলহামদুলিল্লাহ।"</p>
-                        </div>
-                    </div>
 
-                    <!-- Review 2 Duplicate -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/2.jpg.jpeg" alt="Facebook Review Screenshot 2" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <div class="review-quote">
+                                <i class="fa-solid fa-quote-left"></i>
+                                <p>"আমি ২টা নিয়েছিলাম, আমি এখন সম্পূর্ণ সুস্থ ধন্যবাদ।"</p>
                             </div>
-                            <div class="review-author">আশাদুজ্জামান বাবু</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আলহামদুলিল্লাহ, আমি খুবই উপকৃত হয়েছি, আপনারা ভালো থাকবেন।"</p>
-                        </div>
-                    </div>
-
-                    <!-- Review 3 Duplicate -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/4.jpg.jpeg" alt="Facebook Review Screenshot 3" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="review-author">মো: জিয়াউর রহমান</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আলহামদুলিল্লাহ আল্লাহর রহমতে উপকার পেয়েছি।"</p>
-                        </div>
-                    </div>
-
-                    <!-- Review 4 Duplicate -->
-                    <div class="review-card">
-                        <div class="review-img-wrap review-zoom-btn">
-                            <img src="assets/reviews/5.jpg.jpeg" alt="Facebook Review Screenshot 4" loading="lazy">
-                            <span class="review-zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> বড় করে দেখুন</span>
-                        </div>
-                        <div class="review-body">
-                            <div class="review-stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="review-author">নুরশেদ আহমেদ</div>
-                            <div class="review-verified"><i class="fa-solid fa-circle-check"></i> ভেরিফাইড বায়ার (ফেসবুক)</div>
-                            <p class="review-text">"আমি ২টা নিয়েছিলাম, আমি এখন সম্পূর্ণ সুস্থ ধন্যবাদ।"</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <button type="button" class="carousel-arrow carousel-next" id="reviews-next-btn" aria-label="Next Review">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Pagination Dots & Status -->
+        <div class="carousel-dots-wrap" id="reviews-dots-wrap"></div>
+        <div class="carousel-hint-text">
+            <i class="fa-solid fa-circle-play"></i> অটো-স্লাইড হচ্ছে • যে কোনো রিভিউতে ক্লিক করে বড় করে দেখুন
         </div>
 
         <div class="container">
@@ -524,7 +529,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 </div>
                 <div class="trust-item">
                     <div class="trust-item-icon"><i class="fa-solid fa-award"></i></div>
-                    <h4>১০০% অরিজিনাল গ্যারান্টি</h4>
+                    <h4>100% অরিজিনাল গ্যারান্টি</h4>
                     <p>সরাসরি আমদানিকৃত অথেনটিক সাউথ মুন প্রোডাক্ট</p>
                 </div>
             </div>
@@ -690,7 +695,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
 
                         <div class="checkout-guarantee-note">
                             <i class="fa-solid fa-lock" style="color: var(--accent-dark);"></i> 
-                            ১০০% নিরাপদ চেকআউট | পণ্য হাতে পেয়ে টাকা পরিশোধ (ক্যাশ অন ডেলিভারি)
+                            100% নিরাপদ চেকআউট | পণ্য হাতে পেয়ে টাকা পরিশোধ (ক্যাশ অন ডেলিভারি)
                         </div>
                     </form>
                 </div>
@@ -758,7 +763,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 <a href="tel:<?= htmlspecialchars($hotline) ?>"><i class="fa-solid fa-phone"></i> <?= htmlspecialchars($hotline) ?></a>
             </div>
             <p style="color: #64748b; max-width: 650px; margin: 10px auto;">
-                সাউথ মুন বাংলাদেশ — ১০০% আসল কোয়ালিটি নিশ্চয়তা সহ সরাসরি আমদানিকৃত পণ্য পৌঁছে দিচ্ছি আপনার দোরগোড়ায়।
+                সাউথ মুন বাংলাদেশ — 100% আসল কোয়ালিটি নিশ্চয়তা সহ সরাসরি আমদানিকৃত পণ্য পৌঁছে দিচ্ছি আপনার দোরগোড়ায়।
             </p>
             <div class="footer-copyright">
                 &copy; <?= date('Y') ?> South Moon Lipoma Removal. All Rights Reserved.

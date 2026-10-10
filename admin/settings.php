@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Read current settings
-$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | ১০০% অরিজিনাল');
+$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | 100% অরিজিনাল');
 $product_name         = get_setting('product_name', 'South Moon Lipoma Removal Spray');
 $hotline              = get_setting('hotline', '01872307272');
 $whatsapp             = get_setting('whatsapp', '01872307272');
