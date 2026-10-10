@@ -43,8 +43,8 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Custom Medical CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Custom Medical CSS with Auto Cache Busting -->
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
 
     <!-- Meta / Facebook Pixel Tracking -->
     <?php if ($meta_pixel_active && !empty($meta_pixel_id)): ?>
@@ -371,9 +371,8 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     <span class="rating-text"><strong>4.9 / 5</strong> রেটিং • ৩,৫০০+ সন্তুষ্ট কাস্টমার • <strong>100% আসল প্রমাণ</strong></span>
                 </div>
             </div>
-        </div>
 
-        <!-- Premium Auto-Sliding Reviews Carousel -->
+            <!-- Premium Auto-Sliding Reviews Carousel -->
         <div class="reviews-carousel-container" id="reviews-carousel">
             <button type="button" class="carousel-arrow carousel-prev" id="reviews-prev-btn" aria-label="Previous Review">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -514,8 +513,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
             <i class="fa-solid fa-circle-play"></i> অটো-স্লাইড হচ্ছে • যে কোনো রিভিউতে ক্লিক করে বড় করে দেখুন
         </div>
 
-        <div class="container">
-            <!-- Trust Bar -->
+        <!-- Trust Bar -->
             <div class="trust-bar">
                 <div class="trust-item">
                     <div class="trust-item-icon"><i class="fa-solid fa-truck-fast"></i></div>
@@ -766,7 +764,10 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 সাউথ মুন বাংলাদেশ — 100% আসল কোয়ালিটি নিশ্চয়তা সহ সরাসরি আমদানিকৃত পণ্য পৌঁছে দিচ্ছি আপনার দোরগোড়ায়।
             </p>
             <div class="footer-copyright">
-                &copy; <?= date('Y') ?> South Moon Lipoma Removal. All Rights Reserved.
+                <div>&copy; <?= date('Y') ?> South Moon Lipoma Removal. All Rights Reserved.</div>
+                <div class="footer-dev-credit">
+                    Developed by <a href="https://www.cyberdeveloperbd.com/" target="_blank" rel="noopener noreferrer">Cyber Developer BD</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -800,8 +801,8 @@ $custom_footer_script = get_setting('custom_footer_script', '');
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <!-- Scripts with Auto Cache Busting -->
+    <script src="assets/js/main.js?v=<?= filemtime(__DIR__ . '/assets/js/main.js') ?>"></script>
 
     <!-- Custom Footer Scripts -->
     <?php if (!empty($custom_footer_script)): ?>

@@ -697,9 +697,9 @@ img {
 /* Reviews Carousel Container & Viewport */
 .reviews-carousel-container {
     position: relative;
-    max-width: 1160px;
+    max-width: 100%;
     margin: 25px auto 10px;
-    padding: 0 52px;
+    padding: 0 48px;
 }
 
 .reviews-carousel-viewport {
@@ -1592,6 +1592,27 @@ textarea.form-control {
     border-top: 1px solid #1e293b;
     padding-top: 20px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.footer-dev-credit {
+    font-size: 0.92rem;
+    color: #94a3b8;
+}
+
+.footer-dev-credit a {
+    color: #38bdf8;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.footer-dev-credit a:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
 }
 
 /* Sticky Mobile Bar */
@@ -1709,6 +1730,12 @@ textarea.form-control {
     }
     .steps-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .review-slide {
+        flex: 0 0 calc((100% - 22px) / 2);
+    }
+    .reviews-carousel-container {
+        padding: 0 44px;
     }
 }
 

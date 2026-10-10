@@ -3,5 +3,6 @@ database/*.sqlite
 
 # System and logs
 *.log
+*.zip
 .DS_Store
 Thumbs.db
