@@ -230,7 +230,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 <div>
                     <img src="assets/images/5.webp" alt="Types of Lipoma Tumors" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
                 </div>
-                <div class="symptoms-list">
+                <!-- <div class="symptoms-list">
                     <div class="symptom-item">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         <span>শরীরের কোথাও ত্বকের নিচে ছোট বা বড় চর্বিযুক্ত ফোলা রয়েছে?</span>
@@ -255,7 +255,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     <div class="solution-box">
                         <i class="fa-solid fa-circle-check"></i> যদি আপনার উত্তর <strong>"হ্যাঁ"</strong> হয়, তবে অপারেশন ছাড়াই সাউথ মুন লাইপোমা স্প্রে আপনার জন্য সবচেয়ে নিরাপদ ও স্থায়ী ঘরোয়া সমাধান।
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
