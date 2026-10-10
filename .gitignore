@@ -1,0 +1,7 @@
+# Database files (auto-generated on launch)
+database/*.sqlite
+
+# System and logs
+*.log
+.DS_Store
+Thumbs.db
