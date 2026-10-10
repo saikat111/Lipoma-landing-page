@@ -131,16 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 18px;
             border: 1px solid #fecaca;
         }
-        .default-hint {
-            margin-top: 20px;
-            padding: 10px;
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: #64748b;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -161,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="">
             <div class="form-group">
                 <label class="form-label">ইউজারনেম</label>
-                <input type="text" name="username" class="form-input" placeholder="admin" required autofocus>
+                <input type="text" name="username" class="form-input" placeholder="ইউজারনেম" required autofocus>
             </div>
             <div class="form-group">
                 <label class="form-label">পাসওয়ার্ড</label>
@@ -172,9 +162,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </form>
 
-        <div class="default-hint">
-            <strong>ডিফল্ট লগইন তথ্য:</strong><br>
-            ইউজারনেম: <code>admin</code> | পাসওয়ার্ড: <code>admin123456</code>
+        <div style="margin-top: 24px; text-align: center;">
+            <a href="../" style="color: #64748b; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-arrow-left"></i> ওয়েবসাইটে ফিরে যান
+            </a>
         </div>
     </div>
 
