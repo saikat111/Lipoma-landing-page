@@ -259,4 +259,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // -------------------------------------------------------------
+    // Reviews Marquee Touch Pause Support (Mobile Friendly)
+    // -------------------------------------------------------------
+    const reviewsMarquee = document.getElementById('reviews-marquee');
+    if (reviewsMarquee) {
+        reviewsMarquee.addEventListener('touchstart', function () {
+            this.classList.add('is-paused');
+        }, { passive: true });
+
+        reviewsMarquee.addEventListener('touchend', function () {
+            setTimeout(() => {
+                this.classList.remove('is-paused');
+            }, 1500);
+        }, { passive: true });
+    }
 });
