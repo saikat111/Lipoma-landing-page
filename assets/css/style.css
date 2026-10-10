@@ -188,11 +188,20 @@ img {
     gap: 8px;
     box-shadow: 0 4px 14px rgba(225, 29, 72, 0.3);
     transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
 }
 
 .header-cta-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(225, 29, 72, 0.4);
+}
+
+.site-logo {
+    height: 52px;
+    width: auto;
+    display: block;
+    object-fit: contain;
 }
 
 /* Hero Section */
@@ -807,6 +816,200 @@ img {
     font-size: 0.95rem;
     color: #94a3b8;
     text-decoration: line-through;
+}
+
+/* Quantity Stepper Control */
+.quantity-control-wrap {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.quantity-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 30px;
+    padding: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.qty-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: var(--primary-deep);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+.qty-input {
+    width: 55px;
+    height: 38px;
+    border: none;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+    -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+    z-index: 9998;
+    text-decoration: none;
+    animation: waPulse 2s infinite;
+    transition: transform 0.3s;
+}
+
+.floating-whatsapp-btn:hover {
+    transform: scale(1.12);
+    color: #ffffff;
+}
+
+.floating-whatsapp-btn .whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.floating-whatsapp-btn .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #0f172a;
+}
+
+.floating-whatsapp-btn:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 76px;
+}
+
+@keyframes waPulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media (max-width: 768px) {
+    .floating-whatsapp-btn {
+        bottom: 82px; /* Above the mobile sticky bar */
+        right: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 1.7rem;
+    }
+}
+
+/* Animated CTA Buttons (High-Converting Shimmer & Pulse) */
+.btn-animated {
+    position: relative;
+    overflow: hidden;
+    animation: btnHeartbeat 2.8s infinite ease-in-out !important;
+}
+
+.btn-animated::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -80%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(28deg);
+    animation: btnShimmer 3s infinite ease-in-out;
+}
+
+@keyframes btnShimmer {
+    0% { left: -80%; }
+    35% { left: 160%; }
+    100% { left: 160%; }
+}
+
+@keyframes btnHeartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.04); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.04); }
+    70% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+.btn-animated:hover {
+    transform: scale(1.06) !important;
 }
 
 /* Step 2: Customer Details Inputs */

@@ -144,7 +144,7 @@ $hotline      = get_setting('hotline', '01872307272');
     <div class="invoice-card">
         <div class="invoice-top">
             <div class="company-info">
-                <h2>সাউথ মুন বাংলাদেশ</h2>
+                <img src="../assets/images/logo.svg" alt="South Moon Logo" style="height: 48px; margin-bottom: 8px;">
                 <p>হটলাইন: <?= htmlspecialchars($hotline) ?></p>
                 <p>ক্যাশ অন ডেলিভারি হোম ডেলিভারি পার্সেল</p>
             </div>
@@ -178,14 +178,18 @@ $hotline      = get_setting('hotline', '01872307272');
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                $qty = (int)($order['quantity'] ?? 1);
+                $subtotal = (float)$order['package_price'] * $qty;
+                ?>
                 <tr>
                     <td>
                         <strong><?= htmlspecialchars($order['package_name']) ?></strong>
                         <div style="font-size: 0.85rem; color: #64748b;"><?= htmlspecialchars($product_name) ?></div>
                     </td>
-                    <td style="text-align: center;">১</td>
+                    <td style="text-align: center; font-weight: 700;"><?= $qty ?></td>
                     <td style="text-align: right;">৳<?= number_format($order['package_price']) ?></td>
-                    <td style="text-align: right;">৳<?= number_format($order['package_price']) ?></td>
+                    <td style="text-align: right; font-weight: 700;">৳<?= number_format($subtotal) ?></td>
                 </tr>
             </tbody>
         </table>
@@ -194,7 +198,7 @@ $hotline      = get_setting('hotline', '01872307272');
             <table class="totals-table">
                 <tr>
                     <td class="label">প্রোডাক্ট সাবটোটাল:</td>
-                    <td class="val">৳<?= number_format($order['package_price']) ?></td>
+                    <td class="val">৳<?= number_format($subtotal) ?></td>
                 </tr>
                 <tr>
                     <td class="label">ডেলিভারি চার্জ (<?= htmlspecialchars($order['shipping_area']) ?>):</td>

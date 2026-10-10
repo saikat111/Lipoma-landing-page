@@ -159,8 +159,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
 
     <nav class="admin-nav">
         <div class="nav-brand">
-            <i class="fa-solid fa-pills" style="color: var(--primary);"></i>
-            <span>সাউথ মুন শপ অ্যাডমিন</span>
+            <img src="../assets/images/logo.svg" alt="South Moon Logo" style="height: 38px;">
         </div>
         <div class="nav-links">
             <a href="index.php" class="nav-link-btn"><i class="fa-solid fa-list-check"></i> অর্ডার তালিকা</a>

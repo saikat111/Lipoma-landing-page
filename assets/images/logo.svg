@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="340" height="70">
+  <defs>
+    <linearGradient id="medGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Logo Icon: Medical Shield + Crescent Moon + Herbal Leaf -->
+  <g transform="translate(6, 5)" filter="url(#shadow)">
+    <!-- Outer Shield / Circle Container -->
+    <rect x="0" y="0" width="60" height="60" rx="16" fill="url(#medGrad)"/>
+    
+    <!-- Crescent Moon (South Moon reference) -->
+    <path d="M38 12 A 18 18 0 1 1 20 44 A 14 14 0 0 0 38 12 Z" fill="#ffffff" opacity="0.95"/>
+    
+    <!-- Herbal Leaf -->
+    <path d="M26 34 C 26 22 38 18 42 16 C 42 28 32 38 26 34 Z" fill="url(#leafGrad)"/>
+    <path d="M28 32 Q 33 26 39 21" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.8"/>
+    
+    <!-- Plus Medical Symbol Accent -->
+    <rect x="15" y="22" width="4" height="12" rx="1.5" fill="#ffffff"/>
+    <rect x="11" y="26" width="12" height="4" rx="1.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(76, 12)">
+    <!-- Primary Brand Name -->
+    <text x="0" y="26" font-family="'Hind Siliguri', 'Inter', -apple-system, sans-serif" font-size="28" font-weight="900" fill="#0c4a6e" letter-spacing="-0.5">
+      South<tspan fill="#0284c7">Moon</tspan>
+    </text>
+    
+    <!-- Secondary Badge Text -->
+    <rect x="155" y="10" width="95" height="18" rx="9" fill="#e0f2fe"/>
+    <text x="202" y="23" font-family="'Hind Siliguri', 'Inter', sans-serif" font-size="10" font-weight="800" fill="#0369a1" text-anchor="middle" letter-spacing="0.5">
+      ORIGINAL CARE
+    </text>
+
+    <!-- Bengali Tagline -->
+    <text x="0" y="44" font-family="'Hind Siliguri', sans-serif" font-size="13" font-weight="700" fill="#059669">
+      লাইপোমা কেয়ার <tspan fill="#64748b" font-weight="500">• ১০০% ভেষজ সমাধান</tspan>
+    </text>
+  </g>
+</svg>

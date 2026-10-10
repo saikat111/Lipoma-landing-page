@@ -152,6 +152,9 @@ $meta_pixel_active = (int) get_setting('meta_pixel_active', 0) === 1;
 
     <div class="container">
         <div class="thank-you-wrapper">
+            <div style="background:#ffffff; padding:18px 20px 10px; text-align:center; border-bottom:1px solid #e2e8f0;">
+                <img src="assets/images/logo.svg" alt="South Moon Lipoma Care Logo" style="height: 50px; margin: 0 auto; display: block;">
+            </div>
             <div class="thank-you-header">
                 <div class="success-checkmark">
                     <i class="fa-solid fa-check"></i>
@@ -180,8 +183,16 @@ $meta_pixel_active = (int) get_setting('meta_pixel_active', 0) === 1;
                         <td class="val" style="word-break: break-word;"><?= nl2br(htmlspecialchars($order['address'])) ?></td>
                     </tr>
                     <tr>
-                        <td class="label">নির্বাচিত প্যাকেজ:</td>
-                        <td class="val"><?= htmlspecialchars($order['package_name']) ?> (৳<?= number_format($order['package_price']) ?>)</td>
+                        <td class="label">প্যাকেজ ও পরিমাণ:</td>
+                        <td class="val">
+                            <?= htmlspecialchars($order['package_name']) ?>
+                            <span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:10px; font-size:0.85rem; margin-left:4px;">
+                                <?= (int)$order['quantity'] ?> টি
+                            </span>
+                            <div style="font-size:0.85rem; color:#64748b; font-weight:normal;">
+                                (একক মূল্য ৳<?= number_format($order['package_price']) ?> × <?= (int)$order['quantity'] ?> = ৳<?= number_format($order['package_price'] * (int)$order['quantity']) ?>)
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="label">ডেলিভারি এলাকা:</td>

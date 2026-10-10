@@ -105,13 +105,9 @@ $custom_footer_script = get_setting('custom_footer_script', '');
         <div class="container">
             <div class="header-inner">
                 <div class="logo-wrap">
-                    <div class="logo-badge">South Moon</div>
-                    <div class="logo-text">
-                        <h1>সাউথ মুন বাংলাদেশ</h1>
-                        <span>১০০% অরিজিনাল প্রোডাক্ট নিশ্চয়তা</span>
-                    </div>
+                    <img src="assets/images/logo.svg" alt="South Moon Lipoma Care Logo" class="site-logo">
                 </div>
-                <a href="#order-section" class="header-cta-btn scroll-to-order">
+                <a href="#order-section" class="header-cta-btn scroll-to-order btn-animated">
                     <i class="fa-solid fa-cart-shopping"></i> অর্ডার করতে চাই
                 </a>
             </div>
@@ -198,7 +194,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     <h3>⚡ বিশেষ ডিসকাউন্ট অফার চলছে!</h3>
                     <p>স্টক সীমিত — আজই অর্ডার করুন এবং দ্রুত লাইপোমার অস্বস্তি থেকে মুক্তি পান</p>
                 </div>
-                <a href="#order-section" class="btn-order-now scroll-to-order">
+                <a href="#order-section" class="btn-order-now scroll-to-order btn-animated">
                     <i class="fa-solid fa-hand-point-right"></i> অর্ডার করতে চাই
                 </a>
             </div>
@@ -505,6 +501,23 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                             </div>
                         </div>
 
+                        <!-- Quantity Stepper Control -->
+                        <div class="quantity-control-wrap">
+                            <div class="quantity-label">
+                                <i class="fa-solid fa-boxes-stacked" style="color: var(--primary);"></i>
+                                <span>প্রয়োজনীয় পরিমাণ (Quantity) নির্বাচন করুন:</span>
+                            </div>
+                            <div class="quantity-stepper">
+                                <button type="button" class="qty-btn" id="qty-minus" aria-label="Decrease quantity">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <input type="number" id="order-quantity" name="quantity" value="1" min="1" max="25" class="qty-input">
+                                <button type="button" class="qty-btn" id="qty-plus" aria-label="Increase quantity">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
                         <!-- Step 2: Customer Delivery Details -->
                         <div class="form-step-title">
                             <span class="step-circle">২</span>
@@ -572,7 +585,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                         </div>
 
                         <!-- Submit Order Button -->
-                        <button type="submit" id="btn-submit-order" class="btn-submit-order">
+                        <button type="submit" id="btn-submit-order" class="btn-submit-order btn-animated">
                             <span class="btn-spinner"></span>
                             <span class="btn-text">
                                 <i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম করুন (<span id="btn-submit-amount">৳<?= number_format($pkg1_price + $delivery_dhaka) ?></span>)
@@ -666,11 +679,17 @@ $custom_footer_script = get_setting('custom_footer_script', '');
             <a href="https://wa.me/88<?= preg_replace('/[^0-9]/', '', $whatsapp) ?>" target="_blank" class="sticky-btn-whatsapp">
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
-            <a href="#order-section" class="sticky-btn-order scroll-to-order">
+            <a href="#order-section" class="sticky-btn-order scroll-to-order btn-animated">
                 <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
             </a>
         </div>
     </div>
+
+    <!-- Floating WhatsApp Button (Direct Chat Link) -->
+    <a href="https://wa.me/88<?= preg_replace('/[^0-9]/', '', $whatsapp) ?>?text=<?= urlencode('সাউথ মুন লাইপোমা স্প্রে সম্পর্কে বিস্তারিত জানতে চাই') ?>" target="_blank" class="floating-whatsapp-btn" title="সরাসরি WhatsApp করুন">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">সরাসরি WhatsApp করুন</span>
+    </a>
 
     <!-- Review Image Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox-modal">

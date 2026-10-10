@@ -448,8 +448,7 @@ $orders = $orders_stmt->fetchAll();
     <!-- Top Admin Bar -->
     <nav class="admin-nav">
         <div class="nav-brand">
-            <i class="fa-solid fa-pills" style="color: var(--primary);"></i>
-            <span>সাউথ মুন শপ অ্যাডমিন</span>
+            <img src="../assets/images/logo.svg" alt="South Moon Logo" style="height: 38px;">
         </div>
         <div class="nav-links">
             <a href="index.php" class="nav-link-btn active"><i class="fa-solid fa-list-check"></i> অর্ডার তালিকা</a>
@@ -575,6 +574,11 @@ $orders = $orders_stmt->fetchAll();
                                 </td>
                                 <td>
                                     <strong><?= htmlspecialchars($o['package_name']) ?></strong>
+                                    <?php if ((int)($o['quantity'] ?? 1) > 1): ?>
+                                        <span style="background: #e0f2fe; color: #0369a1; padding: 2px 7px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; display: inline-block; margin-left: 4px;">
+                                            <?= (int)$o['quantity'] ?> টি
+                                        </span>
+                                    <?php endif; ?>
                                     <div style="font-size: 0.85rem; color: #64748b;">
                                         <?= htmlspecialchars($o['shipping_area']) ?> (৳<?= number_format($o['shipping_cost']) ?>)
                                     </div>
@@ -665,7 +669,7 @@ $orders = $orders_stmt->fetchAll();
                     <strong>সম্পূর্ণ ডেলিভারি ঠিকানা:</strong>
                     <div style="background:#f8fafc; padding:8px 12px; border-radius:6px; border:1px solid #e2e8f0; line-height:1.4;">${order.address}</div>
                 </div>
-                <div class="modal-row"><strong>প্যাকেজ:</strong> <span>${order.package_name} (৳${order.package_price})</span></div>
+                <div class="modal-row"><strong>প্যাকেজ ও পরিমাণ:</strong> <span>${order.package_name} (${order.quantity || 1}টি) (একক মূল্য ৳${order.package_price})</span></div>
                 <div class="modal-row"><strong>ডেলিভারি এলাকা:</strong> <span>${order.shipping_area} (৳${order.shipping_cost})</span></div>
                 <div class="modal-row" style="font-size:1.15rem; font-weight:800; color:#e11d48;">
                     <strong>সর্বমোট প্রদেয় টাকা:</strong> <span>৳${order.total_amount}</span>

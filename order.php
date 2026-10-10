@@ -45,7 +45,9 @@ if (empty($address) || mb_strlen($address) < 5) {
     exit;
 }
 
-// 3. Determine Package and Pricing from Server Settings
+// 3. Determine Package, Quantity and Pricing from Server Settings
+$quantity = max(1, min(50, (int) ($_POST['quantity'] ?? 1)));
+
 if ($selected_pkg === 'pkg2') {
     $package_name  = get_setting('package_2_title', '১টি স্প্রে');
     $package_price = (float) get_setting('package_2_price', 790);
@@ -63,7 +65,8 @@ if ($shipping_area === 'outside') {
     $shipping_cost  = (float) get_setting('delivery_dhaka', 70);
 }
 
-$total_amount = $package_price + $shipping_cost;
+$subtotal     = $package_price * $quantity;
+$total_amount = $subtotal + $shipping_cost;
 $ip_address   = $_SERVER['REMOTE_ADDR'] ?? '';
 
 // Generate Human-Readable Order Number
@@ -77,7 +80,7 @@ try {
         shipping_cost, total_amount, note, status, ip_address, created_at
     ) VALUES (
         :order_number, :customer_name, :phone, :address,
-        :package_name, :package_price, 1, :shipping_area,
+        :package_name, :package_price, :quantity, :shipping_area,
         :shipping_cost, :total_amount, :note, 'pending', :ip_address, CURRENT_TIMESTAMP
     )";
 
@@ -89,6 +92,7 @@ try {
         ':address'       => $address,
         ':package_name'  => $package_name,
         ':package_price' => $package_price,
+        ':quantity'      => $quantity,
         ':shipping_area' => $shipping_label,
         ':shipping_cost' => $shipping_cost,
         ':total_amount'  => $total_amount,

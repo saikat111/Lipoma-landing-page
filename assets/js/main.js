@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const packageInput = document.getElementById('selected-package');
     const deliveryInput = document.getElementById('selected-delivery');
     
+    const qtyInput = document.getElementById('order-quantity');
+    const qtyMinus = document.getElementById('qty-minus');
+    const qtyPlus = document.getElementById('qty-plus');
+
     const summaryPackageTitle = document.getElementById('summary-package-title');
     const summaryPackagePrice = document.getElementById('summary-package-price');
     const summaryDeliveryTitle = document.getElementById('summary-delivery-title');
@@ -30,16 +34,34 @@ document.addEventListener('DOMContentLoaded', function () {
     // -------------------------------------------------------------
     let currentPackagePrice = 0;
     let currentDeliveryPrice = 0;
+    let currentQuantity = 1;
 
     function updateCalculations() {
+        // Read quantity
+        if (qtyInput) {
+            currentQuantity = parseInt(qtyInput.value, 10) || 1;
+            if (currentQuantity < 1) currentQuantity = 1;
+            qtyInput.value = currentQuantity;
+        }
+
         // Find selected package
         const selectedPkg = document.querySelector('.package-card.selected');
         if (selectedPkg) {
             currentPackagePrice = parseFloat(selectedPkg.dataset.price) || 0;
             const title = selectedPkg.dataset.title;
             packageInput.value = selectedPkg.dataset.package;
-            if (summaryPackageTitle) summaryPackageTitle.textContent = title;
-            if (summaryPackagePrice) summaryPackagePrice.textContent = '৳' + currentPackagePrice.toLocaleString('en-US');
+            const subtotal = currentPackagePrice * currentQuantity;
+
+            if (summaryPackageTitle) {
+                summaryPackageTitle.textContent = title + (currentQuantity > 1 ? ` (${currentQuantity}x)` : '');
+            }
+            if (summaryPackagePrice) {
+                if (currentQuantity > 1) {
+                    summaryPackagePrice.textContent = `৳${currentPackagePrice.toLocaleString('en-US')} × ${currentQuantity} = ৳${subtotal.toLocaleString('en-US')}`;
+                } else {
+                    summaryPackagePrice.textContent = '৳' + currentPackagePrice.toLocaleString('en-US');
+                }
+            }
         }
 
         // Find selected delivery
@@ -52,9 +74,35 @@ document.addEventListener('DOMContentLoaded', function () {
             if (summaryDeliveryPrice) summaryDeliveryPrice.textContent = '৳' + currentDeliveryPrice.toLocaleString('en-US');
         }
 
-        const total = currentPackagePrice + currentDeliveryPrice;
+        const total = (currentPackagePrice * currentQuantity) + currentDeliveryPrice;
         if (summaryTotalAmount) summaryTotalAmount.textContent = '৳' + total.toLocaleString('en-US');
         if (submitBtnAmount) submitBtnAmount.textContent = '৳' + total.toLocaleString('en-US');
+    }
+
+    // Quantity Stepper Controls
+    if (qtyMinus && qtyInput) {
+        qtyMinus.addEventListener('click', function () {
+            let val = parseInt(qtyInput.value, 10) || 1;
+            if (val > 1) {
+                qtyInput.value = val - 1;
+                updateCalculations();
+            }
+        });
+    }
+
+    if (qtyPlus && qtyInput) {
+        qtyPlus.addEventListener('click', function () {
+            let val = parseInt(qtyInput.value, 10) || 1;
+            if (val < 25) {
+                qtyInput.value = val + 1;
+                updateCalculations();
+            }
+        });
+    }
+
+    if (qtyInput) {
+        qtyInput.addEventListener('change', updateCalculations);
+        qtyInput.addEventListener('input', updateCalculations);
     }
 
     // Package Selection Click
