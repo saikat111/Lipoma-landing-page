@@ -294,7 +294,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
 
             <!-- Natural Herbal Ingredients (4.webp) -->
             <div class="ingredients-card">
-                <div>
+                <!-- <div>
                     <span class="section-tag tag-green">100% ভেষজ উপাদান</span>
                     <h3 style="font-size: 1.45rem; color: var(--primary-deep); font-weight: 800; margin-bottom: 12px;">প্রাকৃতিক চীনা হার্বাল উপাদানের সংমিশ্রণ</h3>
                     <p style="font-size: 1.05rem; color: #475569;">
@@ -308,7 +308,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                         <span class="ing-badge"><i class="fa-solid fa-seedling" style="color: var(--accent-dark);"></i> সিউডো-জিনসেং (Ginseng)</span>
                         <span class="ing-badge"><i class="fa-solid fa-seedling" style="color: var(--accent-dark);"></i> জেরানিয়াম (Geranium)</span>
                     </div>
-                </div>
+                </div> -->
                 <div>
                     <img src="assets/images/4.webp" alt="South Moon Herbal Ingredients" style="border-radius: var(--radius-md);">
                 </div>
