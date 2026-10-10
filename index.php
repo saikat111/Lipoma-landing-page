@@ -80,7 +80,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
 </head>
 <body>
 
-    <!-- Top Urgency Notice Bar -->
+    <!-- <!-- Top Urgency Notice Bar -->
     <header class="top-notice-bar">
         <div class="container">
             <div class="notice-inner">
@@ -98,7 +98,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <!-- Main Navigation / Brand Bar -->
     <div class="site-header">
@@ -132,7 +132,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <section class="hero-section">
         <div class="container">
             <div class="hero-headline-wrap">
-                <span class="hero-tag"><i class="fa-solid fa-shield-halved"></i> হার্বাল ও প্রাকৃতিক লাইপোমা কেয়ার</span>
+                <!-- <span class="hero-tag"><i class="fa-solid fa-shield-halved"></i> হার্বাল ও প্রাকৃতিক লাইপোমা কেয়ার</span> -->
                 <h1 class="hero-title">
                     <span class="hero-title-main">অপারেশন ছাড়াই কি লাইপোমা দূর করা সম্ভব?</span>
                     <span class="hero-title-badge-wrap">
@@ -514,7 +514,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
         </div>
 
         <!-- Trust Bar -->
-            <div class="trust-bar">
+            <!-- <div class="trust-bar">
                 <div class="trust-item">
                     <div class="trust-item-icon"><i class="fa-solid fa-truck-fast"></i></div>
                     <h4>দ্রুত হোম ডেলিভারি</h4>
@@ -530,7 +530,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     <h4>100% অরিজিনাল গ্যারান্টি</h4>
                     <p>সরাসরি আমদানিকৃত অথেনটিক সাউথ মুন প্রোডাক্ট</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
