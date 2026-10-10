@@ -80,8 +80,8 @@ $custom_footer_script = get_setting('custom_footer_script', '');
 </head>
 <body>
 
-    <!-- <!-- Top Urgency Notice Bar -->
-    <header class="top-notice-bar">
+
+    <!-- <header class="top-notice-bar">
         <div class="container">
             <div class="notice-inner">
                 <div class="pulse-badge">
@@ -98,7 +98,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 </div>
             </div>
         </div>
-    </header> -->
+    </header>  -->
 
     <!-- Main Navigation / Brand Bar -->
     <div class="site-header">
