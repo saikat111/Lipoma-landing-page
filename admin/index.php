@@ -74,6 +74,10 @@ $orders = $orders_stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>অর্ডার ড্যাশবোর্ড | সাউথ মুন লাইপোমা শপ</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/l.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/l.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 

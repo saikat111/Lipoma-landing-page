@@ -25,8 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'delivery_outside'     => trim($_POST['delivery_outside'] ?? '130'),
         'meta_pixel_id'        => trim($_POST['meta_pixel_id'] ?? ''),
         'meta_pixel_active'    => isset($_POST['meta_pixel_active']) ? '1' : '0',
-        'custom_header_script' => trim($_POST['custom_header_script'] ?? ''),
-        'custom_footer_script' => trim($_POST['custom_footer_script'] ?? '')
+        'custom_header_script'        => trim($_POST['custom_header_script'] ?? ''),
+        'custom_footer_script'        => trim($_POST['custom_footer_script'] ?? ''),
+        'fake_order_protection_days'  => trim($_POST['fake_order_protection_days'] ?? '7')
     ];
 
     foreach ($settings_to_update as $k => $v) {
@@ -66,8 +67,9 @@ $delivery_dhaka       = get_setting('delivery_dhaka', '70');
 $delivery_outside     = get_setting('delivery_outside', '130');
 $meta_pixel_id        = get_setting('meta_pixel_id', '');
 $meta_pixel_active    = get_setting('meta_pixel_active', '0') === '1';
-$custom_header_script = get_setting('custom_header_script', '');
-$custom_footer_script = get_setting('custom_footer_script', '');
+$custom_header_script        = get_setting('custom_header_script', '');
+$custom_footer_script        = get_setting('custom_footer_script', '');
+$fake_order_protection_days  = (int) get_setting('fake_order_protection_days', 7);
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -76,6 +78,10 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ওয়েবসাইট ও পিক্সেল সেটিংস | অ্যাডমিন প্যানেল</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/l.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/l.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 
@@ -286,6 +292,24 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                     <div class="form-group">
                         <label class="form-label">ঢাকার বাহিরে ডেলিভারি চার্জ (৳)</label>
                         <input type="number" step="any" name="delivery_outside" class="form-input" value="<?= htmlspecialchars($delivery_outside) ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fake Order Protection Settings -->
+            <div class="settings-card" style="border: 2px solid #10b981;">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i>
+                    <span>ভুয়া অর্ডার প্রতিরোধ সেটিংস (Fake Order Protection)</span>
+                </div>
+                <p style="color: #64748b; font-size: 0.92rem; margin-bottom: 16px;">
+                    একই মোবাইল নাম্বার দিয়ে নির্দিষ্ট দিনের মধ্যে পুনরায় নতুন অর্ডার করা স্বয়ংক্রিয়ভাবে ব্লক করে ভুয়া অর্ডার ও ডেলিভারি লস প্রতিরোধ করুন।
+                </p>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">কত দিনের মধ্যে একই নাম্বারে নতুন অর্ডার ব্লক থাকবে? (দিন)</label>
+                        <input type="number" name="fake_order_protection_days" class="form-input" min="0" max="365" value="<?= htmlspecialchars($fake_order_protection_days) ?>">
+                        <small style="color: #64748b; display: block; margin-top: 4px;">ডিফল্ট: ৭ দিন। (নিষ্ক্রিয় করতে 0 দিন দিন)</small>
                     </div>
                 </div>
             </div>

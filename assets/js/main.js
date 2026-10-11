@@ -180,6 +180,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            // Quick Client-Side Fake Order Protection (7 days)
+            const normalizedPhone = cleanPhone.startsWith('8801') ? cleanPhone.substring(2) : cleanPhone;
+            try {
+                const savedOrders = JSON.parse(localStorage.getItem('sm_orders') || '[]');
+                const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+                const now = Date.now();
+                const existingOrder = savedOrders.find(item => item.phone === normalizedPhone && (now - item.time < sevenDaysMs));
+                if (existingOrder) {
+                    showError('দুঃখিত! এই মোবাইল নাম্বার দিয়ে গত ৭ দিনের মধ্যে ইতিমধ্যেই একটি অর্ডার করা হয়েছে। ভুয়া অর্ডার প্রতিরোধে ৭ দিনের মধ্যে একই নাম্বারে পুনরায় নতুন অর্ডার গ্রহণ করা হয় না। প্রয়োজনে হেল্পলাইনে যোগাযোগ করুন।');
+                    document.getElementById('phone').focus();
+                    return;
+                }
+            } catch (e) {}
+
             // Button loading state
             submitBtn.disabled = true;
             submitBtn.classList.add('loading');
@@ -205,6 +219,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+                    // Record in localStorage for client-side protection
+                    try {
+                        const savedOrders = JSON.parse(localStorage.getItem('sm_orders') || '[]');
+                        savedOrders.push({ phone: normalizedPhone, time: Date.now() });
+                        localStorage.setItem('sm_orders', JSON.stringify(savedOrders));
+                    } catch (e) {}
+
                     // Redirect to thank-you page with order ID
                     window.location.href = data.redirect || 'thank-you.php?id=' + data.order_id;
                 } else {

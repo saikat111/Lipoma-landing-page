@@ -2,9 +2,9 @@
 require_once __DIR__ . '/config.php';
 
 // Fetch settings
-$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে | 100% অরিজিনাল');
+$site_title           = get_setting('site_title', 'সাউথ মুন লাইপোমা রিমুভাল স্প্রে');
 $product_name         = get_setting('product_name', 'South Moon Lipoma Removal Spray');
-$hotline              = get_setting('hotline', '01872307272');
+$hotline              = get_setting('hotline', '01961116565');
 $whatsapp             = get_setting('whatsapp', '01872307272');
 
 $pkg1_title           = get_setting('package_1_title', 'Buy 2 Get 1 Free (৩টি স্প্রে)');
@@ -39,6 +39,11 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <meta property="og:description" content="অপারেশন ছাড়াই কি লাইপোমা দূর করা সম্ভব? হ্যাঁ, সম্ভব! টানা একমাস ব্যবহারে পান লাইপোমা থেকে মুক্তি।">
     <meta property="og:image" content="assets/images/1.PNG">
     <meta property="og:type" content="product">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/l.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/l.png">
+    <link rel="apple-touch-icon" href="assets/images/l.png">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -226,9 +231,9 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                 <p class="section-desc">শরীরের বিভিন্ন স্থানে ছোট বা বড় চর্বির দলা (Lipoma) সময়ের সাথে সাথে অস্বস্তি ও বিব্রতকর পরিস্থিতির সৃষ্টি করে।</p>
             </div>
 
-            <div class="symptoms-grid">
-                <div>
-                    <img src="assets/images/5.webp" alt="Types of Lipoma Tumors" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+            <div class="symptoms-grid" style="display: flex; justify-content: center; align-items: center;">
+                <div style="max-width: 650px; width: 100%; text-align: center;">
+                    <img src="assets/images/5.webp" alt="Types of Lipoma Tumors" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); margin: 0 auto; display: block; max-width: 100%;">
                 </div>
                 <!-- <div class="symptoms-list">
                     <div class="symptom-item">
@@ -293,7 +298,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
             </div>
 
             <!-- Natural Herbal Ingredients (4.webp) -->
-            <div class="ingredients-card">
+            <div class="ingredients-card" style="display: flex; justify-content: center; align-items: center; max-width: 750px; margin: 0 auto;">
                 <!-- <div>
                     <span class="section-tag tag-green">100% ভেষজ উপাদান</span>
                     <h3 style="font-size: 1.45rem; color: var(--primary-deep); font-weight: 800; margin-bottom: 12px;">প্রাকৃতিক চীনা হার্বাল উপাদানের সংমিশ্রণ</h3>
@@ -309,8 +314,8 @@ $custom_footer_script = get_setting('custom_footer_script', '');
                         <span class="ing-badge"><i class="fa-solid fa-seedling" style="color: var(--accent-dark);"></i> জেরানিয়াম (Geranium)</span>
                     </div>
                 </div> -->
-                <div>
-                    <img src="assets/images/4.webp" alt="South Moon Herbal Ingredients" style="border-radius: var(--radius-md);">
+                <div style="max-width: 650px; width: 100%; text-align: center;">
+                    <img src="assets/images/4.webp" alt="South Moon Herbal Ingredients" style="border-radius: var(--radius-md); margin: 0 auto; display: block; max-width: 100%;">
                 </div>
             </div>
         </div>
@@ -765,9 +770,9 @@ $custom_footer_script = get_setting('custom_footer_script', '');
             </p>
             <div class="footer-copyright">
                 <div>&copy; <?= date('Y') ?> South Moon Lipoma Removal. All Rights Reserved.</div>
-                <div class="footer-dev-credit">
+              <!--   <div class="footer-dev-credit">
                     Developed by <a href="https://www.cyberdeveloperbd.com/" target="_blank" rel="noopener noreferrer">Cyber Developer BD</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>

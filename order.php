@@ -45,6 +45,37 @@ if (empty($address) || mb_strlen($address) < 5) {
     exit;
 }
 
+// -----------------------------------------------------------------
+// 2.1 Fake Order Protection: Block duplicate orders from same phone within 7 days
+// -----------------------------------------------------------------
+$protection_days = (int) get_setting('fake_order_protection_days', 7);
+if ($protection_days > 0) {
+    try {
+        $db = get_db();
+        $date_condition = (DB_DRIVER === 'sqlite')
+            ? "created_at >= datetime('now', '-{$protection_days} days')"
+            : "created_at >= DATE_SUB(NOW(), INTERVAL {$protection_days} DAY)";
+
+        $check_stmt = $db->prepare("SELECT id, order_number, created_at FROM orders WHERE (phone = :phone OR phone = :full_phone) AND {$date_condition} AND status != 'cancelled' ORDER BY id DESC LIMIT 1");
+        $check_stmt->execute([
+            ':phone'      => $phone,
+            ':full_phone' => '88' . $phone
+        ]);
+        $recent_order = $check_stmt->fetch();
+
+        if ($recent_order) {
+            $hotline = get_setting('hotline', '01872307272');
+            echo json_encode([
+                'success' => false,
+                'message' => "দুঃখিত! এই মোবাইল নাম্বার ({$phone}) দিয়ে গত {$protection_days} দিনের মধ্যে ইতিমধ্যেই একটি অর্ডার গ্রহণ করা হয়েছে (অর্ডার নং: " . htmlspecialchars($recent_order['order_number']) . ")। ভুয়া অর্ডার প্রতিরোধে {$protection_days} দিনের মধ্যে একই নাম্বারে পুনরায় অর্ডার গ্রহণ করা হয় না। আপনার অর্ডার সংক্রান্ত তথ্যের জন্য সরাসরি কল করুন: " . htmlspecialchars($hotline)
+            ]);
+            exit;
+        }
+    } catch (Exception $e) {
+        // Fall through gracefully if check fails
+    }
+}
+
 // 3. Determine Package, Quantity and Pricing from Server Settings
 $quantity = max(1, min(50, (int) ($_POST['quantity'] ?? 1)));
 
