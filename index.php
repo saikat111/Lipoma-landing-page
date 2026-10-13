@@ -25,6 +25,147 @@ $meta_pixel_active    = (int) get_setting('meta_pixel_active', 0) === 1;
 
 $custom_header_script = get_setting('custom_header_script', '');
 $custom_footer_script = get_setting('custom_footer_script', '');
+
+// =========================================================================
+// Facebook Conversions API (CAPI) & Pixel Configuration
+// =========================================================================
+$fb_access_token = 'EAAMu0Kdh40ABStn4G53rxR5atbAN2zJ77K6LBPur5XYP1r62wBg14nIgo7fLPmnnbLZAZAIpcbV9bggdeIbw3tgNv1jpw7PMOH9lMdWZAvG6nZC5shfweZCFYsTwFSp741zAT3NWkdKxeJGw4zOp1qzAS5msCHp7ZAjeRF6mPOTwMwlsAQhrynbxmiMQDb1pTbegZDZD';
+$fb_test_code    = 'TEST88584'; // Leave empty string '' in live production when done testing
+
+// Target Pixel / Dataset IDs (Auto-uses database pixel if set, or defaults to datasets assigned to this token)
+$fb_pixel_id_setting = get_setting('meta_pixel_id', '');
+if (!empty($fb_pixel_id_setting)) {
+    $fb_pixel_ids = [trim($fb_pixel_id_setting)];
+} else {
+    $fb_pixel_ids = ['830823070028776', '892119713796815', '1066781429691948', '1302647544977792', '28599535763018740'];
+}
+
+/**
+ * Send Event to Meta Facebook Conversions API (CAPI)
+ */
+function send_fb_capi_event(string $event_name, string $event_id, array $custom_data = [], array $user_data = []): array {
+    global $fb_access_token, $fb_test_code, $fb_pixel_ids;
+
+    if (empty($fb_access_token) || empty($fb_pixel_ids)) {
+        return ['success' => false, 'error' => 'Missing access token or pixel ID'];
+    }
+
+    // Capture User IP Address
+    $client_ip = $_SERVER['HTTP_CF_CONNECTING_IP'] 
+        ?? $_SERVER['HTTP_X_REAL_IP'] 
+        ?? (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]) : null) 
+        ?? $_SERVER['REMOTE_ADDR'] 
+        ?? '';
+
+    // Capture User Agent
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+    // Capture / Generate _fbp cookie (Facebook Browser ID)
+    $fbp = $_COOKIE['_fbp'] ?? null;
+    if (!$fbp) {
+        $fbp = 'fb.1.' . time() . '.' . mt_rand(100000000, 999999999);
+        if (!headers_sent()) {
+            @setcookie('_fbp', $fbp, time() + (90 * 86400), '/');
+        }
+    }
+
+    // Capture / Generate _fbc cookie (Facebook Click ID)
+    $fbc = $_COOKIE['_fbc'] ?? null;
+    if (!$fbc && !empty($_GET['fbclid'])) {
+        $fbc = 'fb.1.' . time() . '.' . preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['fbclid']);
+        if (!headers_sent()) {
+            @setcookie('_fbc', $fbc, time() + (90 * 86400), '/');
+        }
+    }
+
+    // Event Source URL
+    $is_https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+    $source_url = ($is_https ? "https://" : "http://") . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/');
+
+    $event_payload = [
+        'event_name'       => $event_name,
+        'event_time'       => time(),
+        'event_id'         => $event_id,
+        'event_source_url' => $source_url,
+        'action_source'    => 'website',
+        'user_data'        => array_merge([
+            'client_ip_address' => $client_ip,
+            'client_user_agent' => $user_agent,
+            'fbp'               => $fbp,
+        ], array_filter(['fbc' => $fbc]), $user_data)
+    ];
+
+    if (!empty($custom_data)) {
+        $event_payload['custom_data'] = $custom_data;
+    }
+
+    $post_data = ['data' => [$event_payload]];
+    if (!empty($fb_test_code)) {
+        $post_data['test_event_code'] = $fb_test_code;
+    }
+
+    $json_payload = json_encode($post_data);
+    $mh = curl_multi_init();
+    $handles = [];
+
+    foreach ($fb_pixel_ids as $pid) {
+        $ch = curl_init("https://graph.facebook.com/v19.0/" . $pid . "/events?access_token=" . urlencode($fb_access_token));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER    => true,
+            CURLOPT_POST              => true,
+            CURLOPT_POSTFIELDS        => $json_payload,
+            CURLOPT_HTTPHEADER        => ['Content-Type: application/json'],
+            CURLOPT_TIMEOUT_MS        => 3000,
+            CURLOPT_CONNECTTIMEOUT_MS => 1500,
+            CURLOPT_SSL_VERIFYPEER    => false,
+            CURLOPT_SSL_VERIFYHOST    => false
+        ]);
+        curl_multi_add_handle($mh, $ch);
+        $handles[$pid] = $ch;
+    }
+
+    $running = null;
+    do {
+        curl_multi_exec($mh, $running);
+        curl_multi_select($mh);
+    } while ($running > 0);
+
+    $responses = [];
+    foreach ($handles as $pid => $ch) {
+        $responses[$pid] = curl_multi_getcontent($ch);
+        curl_multi_remove_handle($mh, $ch);
+    }
+    curl_multi_close($mh);
+
+    return ['success' => true, 'event_id' => $event_id, 'responses' => $responses];
+}
+
+// Generate Unique Event IDs for PageView and ViewContent (for Browser + CAPI Deduplication)
+$pv_event_id = 'pv_' . time() . '_' . bin2hex(random_bytes(4));
+$vc_event_id = 'vc_' . time() . '_' . bin2hex(random_bytes(4));
+
+// Handle AJAX CAPI Event Requests (e.g., InitiateCheckout from JS)
+if (isset($_GET['fb_capi_event']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json; charset=UTF-8');
+    $raw_input = file_get_contents('php://input');
+    $req = json_decode($raw_input, true) ?: $_POST;
+    $e_name = trim($req['event_name'] ?? 'PageView');
+    $e_id   = trim($req['event_id'] ?? ('ajax_' . time() . '_' . bin2hex(random_bytes(4))));
+    $c_data = $req['custom_data'] ?? [];
+    $u_data = $req['user_data'] ?? [];
+    $res = send_fb_capi_event($e_name, $e_id, $c_data, $u_data);
+    echo json_encode($res);
+    exit;
+}
+
+// Fire Server-Side PageView & ViewContent via CAPI on page load
+$capi_pv_res = send_fb_capi_event('PageView', $pv_event_id);
+$capi_vc_res = send_fb_capi_event('ViewContent', $vc_event_id, [
+    'content_name' => $product_name,
+    'content_type' => 'product',
+    'currency'     => 'BDT',
+    'value'        => $pkg1_price
+]);
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -51,9 +192,7 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     <!-- Custom Medical CSS with Auto Cache Busting -->
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
 
-    <!-- Meta / Facebook Pixel Tracking -->
-    <?php if ($meta_pixel_active && !empty($meta_pixel_id)): ?>
-    <!-- Meta Pixel Code -->
+    <!-- Meta / Facebook Pixel Tracking with Conversions API (CAPI) Deduplication -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -61,21 +200,36 @@ $custom_footer_script = get_setting('custom_footer_script', '');
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    t.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '<?= htmlspecialchars($meta_pixel_id) ?>');
-    fbq('track', 'PageView');
+
+    <?php foreach ($fb_pixel_ids as $pid): ?>
+    fbq('init', '<?= htmlspecialchars($pid) ?>');
+    <?php endforeach; ?>
+
+    // Deduplicated PageView (Matches Server CAPI event_id)
+    fbq('track', 'PageView', {}, {eventID: '<?= $pv_event_id ?>'});
+
+    // Deduplicated ViewContent (Matches Server CAPI event_id)
     fbq('track', 'ViewContent', {
         content_name: '<?= htmlspecialchars($product_name) ?>',
         content_type: 'product',
         currency: 'BDT',
         value: <?= $pkg1_price ?>
-    });
+    }, {eventID: '<?= $vc_event_id ?>'});
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=<?= htmlspecialchars($meta_pixel_id) ?>&ev=PageView&noscript=1"
-    /></noscript>
+    <noscript>
+    <?php foreach ($fb_pixel_ids as $pid): ?>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=<?= htmlspecialchars($pid) ?>&ev=PageView&noscript=1"/>
+    <?php endforeach; ?>
+    </noscript>
     <!-- End Meta Pixel Code -->
+
+    <?php if (isset($_GET['test_capi'])): ?>
+    <!-- CAPI Diagnostic Output:
+    <?= htmlspecialchars(json_encode(['pv' => $capi_pv_res, 'vc' => $capi_vc_res], JSON_PRETTY_PRINT)) ?>
+    -->
     <?php endif; ?>
 
     <!-- Custom Header Scripts -->

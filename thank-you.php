@@ -20,6 +20,122 @@ $hotline           = get_setting('hotline', '01872307272');
 $whatsapp          = get_setting('whatsapp', '01872307272');
 $meta_pixel_id     = get_setting('meta_pixel_id', '');
 $meta_pixel_active = (int) get_setting('meta_pixel_active', 0) === 1;
+
+// =========================================================================
+// Facebook Conversions API (CAPI) Configuration for Thank-You Page
+// =========================================================================
+$fb_access_token = 'EAAMu0Kdh40ABStn4G53rxR5atbAN2zJ77K6LBPur5XYP1r62wBg14nIgo7fLPmnnbLZAZAIpcbV9bggdeIbw3tgNv1jpw7PMOH9lMdWZAvG6nZC5shfweZCFYsTwFSp741zAT3NWkdKxeJGw4zOp1qzAS5msCHp7ZAjeRF6mPOTwMwlsAQhrynbxmiMQDb1pTbegZDZD';
+$fb_test_code    = 'TEST88584';
+
+if (!empty($meta_pixel_id)) {
+    $fb_pixel_ids = [trim($meta_pixel_id)];
+} else {
+    $fb_pixel_ids = ['830823070028776', '892119713796815', '1066781429691948', '1302647544977792', '28599535763018740'];
+}
+
+if (!function_exists('send_fb_capi_event')) {
+    function send_fb_capi_event(string $event_name, string $event_id, array $custom_data = [], array $user_data = []): array {
+        global $fb_access_token, $fb_test_code, $fb_pixel_ids;
+
+        if (empty($fb_access_token) || empty($fb_pixel_ids)) {
+            return ['success' => false, 'error' => 'Missing token or pixel'];
+        }
+
+        $client_ip = $_SERVER['HTTP_CF_CONNECTING_IP'] 
+            ?? $_SERVER['HTTP_X_REAL_IP'] 
+            ?? (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]) : null) 
+            ?? $_SERVER['REMOTE_ADDR'] 
+            ?? '';
+
+        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $fbp = $_COOKIE['_fbp'] ?? ('fb.1.' . time() . '.' . mt_rand(100000000, 999999999));
+        $fbc = $_COOKIE['_fbc'] ?? (!empty($_GET['fbclid']) ? ('fb.1.' . time() . '.' . preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['fbclid'])) : null);
+
+        $is_https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+        $source_url = ($is_https ? "https://" : "http://") . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/');
+
+        $event_payload = [
+            'event_name'       => $event_name,
+            'event_time'       => time(),
+            'event_id'         => $event_id,
+            'event_source_url' => $source_url,
+            'action_source'    => 'website',
+            'user_data'        => array_merge([
+                'client_ip_address' => $client_ip,
+                'client_user_agent' => $user_agent,
+                'fbp'               => $fbp,
+            ], array_filter(['fbc' => $fbc]), $user_data)
+        ];
+
+        if (!empty($custom_data)) {
+            $event_payload['custom_data'] = $custom_data;
+        }
+
+        $post_data = ['data' => [$event_payload]];
+        if (!empty($fb_test_code)) {
+            $post_data['test_event_code'] = $fb_test_code;
+        }
+
+        $json_payload = json_encode($post_data);
+        $mh = curl_multi_init();
+        $handles = [];
+
+        foreach ($fb_pixel_ids as $pid) {
+            $ch = curl_init("https://graph.facebook.com/v19.0/" . $pid . "/events?access_token=" . urlencode($fb_access_token));
+            curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER    => true,
+                CURLOPT_POST              => true,
+                CURLOPT_POSTFIELDS        => $json_payload,
+                CURLOPT_HTTPHEADER        => ['Content-Type: application/json'],
+                CURLOPT_TIMEOUT_MS        => 3000,
+                CURLOPT_CONNECTTIMEOUT_MS => 1500,
+                CURLOPT_SSL_VERIFYPEER    => false,
+                CURLOPT_SSL_VERIFYHOST    => false
+            ]);
+            curl_multi_add_handle($mh, $ch);
+            $handles[$pid] = $ch;
+        }
+
+        $running = null;
+        do {
+            curl_multi_exec($mh, $running);
+            curl_multi_select($mh);
+        } while ($running > 0);
+
+        $responses = [];
+        foreach ($handles as $pid => $ch) {
+            $responses[$pid] = curl_multi_getcontent($ch);
+            curl_multi_remove_handle($mh, $ch);
+        }
+        curl_multi_close($mh);
+
+        return ['success' => true, 'event_id' => $event_id, 'responses' => $responses];
+    }
+}
+
+// Generate Event IDs for PageView and Purchase
+$ty_pv_id = 'pv_ty_' . time() . '_' . bin2hex(random_bytes(4));
+$ty_pur_id = 'pur_' . ($order ? $order['order_number'] : ('gen_' . time()));
+
+// Fire CAPI PageView
+send_fb_capi_event('PageView', $ty_pv_id);
+
+// Fire CAPI Purchase if order exists
+if ($order) {
+    $hashed_phone = hash('sha256', '88' . preg_replace('/[^0-9]/', '', $order['phone']));
+    $hashed_fn    = hash('sha256', mb_strtolower(trim($order['customer_name'])));
+    
+    send_fb_capi_event('Purchase', $ty_pur_id, [
+        'content_name' => $order['package_name'],
+        'content_type' => 'product',
+        'value'        => (float) $order['total_amount'],
+        'currency'     => 'BDT',
+        'order_id'     => $order['order_number']
+    ], [
+        'ph' => $hashed_phone,
+        'fn' => $hashed_fn
+    ]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -36,8 +152,7 @@ $meta_pixel_active = (int) get_setting('meta_pixel_active', 0) === 1;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Meta / Facebook Pixel Tracking -->
-    <?php if ($meta_pixel_active && !empty($meta_pixel_id)): ?>
+    <!-- Meta / Facebook Pixel Tracking with CAPI Deduplication -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -45,26 +160,33 @@ $meta_pixel_active = (int) get_setting('meta_pixel_active', 0) === 1;
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    t.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '<?= htmlspecialchars($meta_pixel_id) ?>');
-    fbq('track', 'PageView');
+
+    <?php foreach ($fb_pixel_ids as $pid): ?>
+    fbq('init', '<?= htmlspecialchars($pid) ?>');
+    <?php endforeach; ?>
+
+    fbq('track', 'PageView', {}, {eventID: '<?= $ty_pv_id ?>'});
 
     <?php if ($order): ?>
-    // Fire Purchase Conversion Event
+    // Fire Purchase Conversion Event with CAPI Deduplication
     fbq('track', 'Purchase', {
         content_name: '<?= htmlspecialchars($order['package_name']) ?>',
         content_type: 'product',
         value: <?= (float) $order['total_amount'] ?>,
         currency: 'BDT',
         order_id: '<?= htmlspecialchars($order['order_number']) ?>'
-    });
+    }, {eventID: '<?= $ty_pur_id ?>'});
     <?php endif; ?>
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=<?= htmlspecialchars($meta_pixel_id) ?>&ev=PageView&noscript=1"
-    /></noscript>
-    <?php endif; ?>
+    <noscript>
+    <?php foreach ($fb_pixel_ids as $pid): ?>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=<?= htmlspecialchars($pid) ?>&ev=PageView&noscript=1"/>
+    <?php endforeach; ?>
+    </noscript>
+    <!-- End Meta Pixel Code -->
 
     <style>
         .thank-you-wrapper {
